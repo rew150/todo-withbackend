@@ -1,38 +1,44 @@
-# create-svelte
+# todo-withbackend
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Simple frontend for the purpose of teaching backend using svelte
 
-## Creating a project
+## Expectation
 
-If you're seeing this, you've probably already done this step. Congrats!
+You write backend at port 8080.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+```typescript
+interface TodoEntity {
+    id: number;
+    creatorName: string;
+    text: string;
+    todoType: number;
+}
 
-# create a new project in my-app
-npm create svelte@latest my-app
+interface PostTodo {
+    creatorName: string; // required
+    text: string; // required
+    todoType: number; // required, can be either 1, 2, or 3
+}
+
+interface PatchTodo {
+    text: string; // required
+}
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- `GET /api/todo?todo_type=1` todo_type can be 1, 2, 3 correspond with work, travel, and shopping respectively, returns `TodoEntity[]`.
+- `POST /api/todo` with JSON `PostTodo`, id should be auto-generated start from 1 at backend side.
+- `PATCH /api/todo/{id}` with JSON `PatchTodo`.
+- `DELETE /api/todo/{id}`
 
 ## Building
 
-To create a production version of your app:
-
-```bash
+```
+npm install
+npm run prepare
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Configuration
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- .env.example
+- nginx.conf.example
