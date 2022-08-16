@@ -67,7 +67,7 @@
 	// LIST TODO
 
 	interface TodoEntity {
-		id: number;
+		id: string;
 		creatorName: string;
 		text: string;
 		todoType: number;
@@ -98,12 +98,12 @@
 		}
 	}
 
-	async function handleRemove(i: number) {
+	async function handleRemove(id: string) {
 		const oldClicked = clicked;
 		clicked = -1;
 		// await new Promise((r) => setTimeout(r, 2000));
 		try {
-			const res = await httpClient.delete(`todo/${encodeURIComponent(i)}`);
+			const res = await httpClient.delete(`todo/${encodeURIComponent(id)}`);
 			const resText = await res.text();
 			const snackMsg = res.statusText + '\n' + resText;
 			pop(snackbar, 'success', snackMsg);

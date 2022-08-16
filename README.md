@@ -8,7 +8,7 @@ You write backend at port 8080.
 
 ```typescript
 interface TodoEntity {
-    id: number;
+    id: string;
     creatorName: string;
     text: string;
     todoType: number;
@@ -26,7 +26,7 @@ interface PatchTodo {
 ```
 
 - `GET /api/todo?todo_type=1` todo_type can be 1, 2, 3 correspond with work, travel, and shopping respectively, returns `TodoEntity[]`.
-- `POST /api/todo` with JSON `PostTodo`, id should be auto-generated start from 1 at backend side.
+- `POST /api/todo` with JSON `PostTodo`, id should be auto-generated at backend side.
 - `PATCH /api/todo/{id}` with JSON `PatchTodo`.
 - `DELETE /api/todo/{id}`
 
